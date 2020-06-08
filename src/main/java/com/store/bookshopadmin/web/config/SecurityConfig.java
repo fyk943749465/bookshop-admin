@@ -76,6 +76,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/book", "/login.html", "/auth", "/session.html").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest()
+                .hasAuthority("admin");
+                //.access("hasAuthority('admin')")  //同上一行代码等价
+
+                //.authenticated();
     }
 }

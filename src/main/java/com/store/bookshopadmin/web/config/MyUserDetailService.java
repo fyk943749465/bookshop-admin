@@ -3,6 +3,7 @@ package com.store.bookshopadmin.web.config;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,7 +40,8 @@ public class MyUserDetailService implements UserDetailsService {
 
     private User findUserbyUername(String username) {
         if(username.equalsIgnoreCase("zhangsan")) {
-            return new User(username, "111222", new ArrayList<GrantedAuthority>());
+
+            return new User(username, "111222", AuthorityUtils.createAuthorityList("admin", "xxxxx"));
         }
         return null;
     }
