@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.util.ArrayList;
@@ -23,6 +24,15 @@ public class WebConfig extends WebMvcConfigurationSupport {
         registry.addInterceptor(timeInterceptor);
         super.addInterceptors(registry);
     }
+
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("login");
+        registry.addViewController("/login.html").setViewName("login");
+
+    }
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -43,7 +53,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
         registrationBean.setFilter(filter);
 
         List<String> urls = new ArrayList<>();
-        urls.add("/");
+        urls.add("/*");
 
         registrationBean.setUrlPatterns(urls);
         return registrationBean;
